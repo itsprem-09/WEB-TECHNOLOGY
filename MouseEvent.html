@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h1>Mouse Clicked Representator</h1>
+
+    <div id="show">
+
+    </div>
+
+    <script>
+        document.addEventListener('mousedown',(name)=> {
+            if (name.button == 0) {
+                console.log("Left Mouse Button Clicked");
+                document.getElementById('show').innerHTML = "Left Mouse Button Clicked";
+            }
+            else if (name.button == 1) {
+                console.log("Wheel or middle button");
+                document.getElementById('show').innerHTML = "Wheel or middle button Clicked";
+            }
+            else if (name.button == 2) {
+                console.log("right ");
+                document.getElementById('show').innerHTML = "Right Mouse Button Clicked ";
+            }
+        });
+
+        function display(name) {
+            
+        }
+    </script>
+
+
+</body>
+</html>
