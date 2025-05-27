@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GCD</title>
+</head>
+<body>
+    <script>
+        let a = prompt("Enter First Number : ");
+        let b = prompt("Enter Secound Number :");
+        // for (let i = Math.min(a,b); i >=1; i--) {
+        //     if (a % i == 0 && b % i == 0 ) {
+        //         document.write(i);
+        //         break;
+        //     }
+        // }
+        while (a > 0 && b > 0) {
+            if (a > b) {
+                a = a % b;
+            } else {
+                b = b % a;
+            }
+        }
+        if (a == 0) {
+            document.write(b);
+        } else {
+            document.write(a);
+        }
+    </script>
+</body>
+</html>

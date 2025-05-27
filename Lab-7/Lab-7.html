@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Lab - 7 Codes Open console for better explanation</h1>
+    <script>
+
+        //callbacks in JavaScript
+        function random(a, b, name) {
+            name(a,b);
+        }
+
+        function name(a, b) {
+            console.log(a, b);
+        }
+
+        random(5, 6,name);
+
+        //various types of creating variable in js
+
+        //global scope
+        a = 5;
+
+        //function scope
+        var b = 6;
+
+        //block scope
+        let c = 4;
+        const d = 7;
+
+        //default parameter while using a function
+        // function display(a,b) {
+        //     console.log(a,b);
+        //     // console.log(a+b);
+        // }
+
+        // // display(5,6)
+        // //Output = 5,6
+
+        // display(5)
+        // //Output = 5,undefined
+
+        // add(undefined,6)
+        // //Output = undefined,6
+        
+        function display(a=5,b=4) {
+            console.log(a,b);
+        }
+
+        display(5,6)
+        //Output = 5,6
+
+        display(5)
+        //Output = 5,4
+
+        display(undefined,6)
+        //Output = 5,6
+
+        //spread operator => for merge two array or object
+        
+        arr1 = [1,2,3]
+        arr2 = [4,5,6]
+        new_arr = [...arr1,...arr2];
+        console.log(new_arr);
+        //output = [1, 2, 3, 4, 5, 6]
+
+        //for in loop => get index
+        for (const i in arr1) {
+            console.log(i);
+        }
+        //output = 0,1,2
+
+        //for of loop => get value of element
+        for (const i of arr1) {
+            console.log(i);
+        }
+        //output = 1,2,3
+
+        // Create functions in js
+
+        //normal = you have to call it 
+        function name(params) {
+            //code
+        }
+        name()
+
+        //arrow function = you have to call it
+        const hello = () => {
+            console.log("hello");
+        }
+        hello()
+
+        //Anonymos Function
+        function abc(g){
+            g();
+        }
+        abc(()=>{
+            console.log("abc anonymos called");
+        })
+
+        //create a class in Java Script.
+        class Student{
+            id;
+            name;
+            constructor(id,name){
+                this.id = id;
+                this.name = name;
+            }
+            display(){
+                console.log(this.id+" "+this.name); 
+            }
+        }
+        stu = new Student(1,"prem");
+        stu.display()
+
+        //Array and Object Destructuring
+
+        let arr = [1,2,3,4,5,6,7]
+        console.log(arr);
+        let [index1,index2,...restArray] = arr;
+        console.log(index1); 
+        console.log(index2); 
+        console.log(restArray); 
+
+
+        const obj = {
+            first : 1,
+            b : 2,
+            c : 3
+        }
+        const new_obj = {...obj, d : 4};
+        console.log(new_obj);
+
+        const {first , ...restobj} = new_obj;
+        console.log(first);
+        console.log(restobj);
+
+
+
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Basic Game</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        #myScore {
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body onkeyup="moveObject(event)">
+    <div id="myScore" style="display: flex; justify-content: center;">
+        Current Score : 0
+    </div>
+	<hr>
+
+    <img src="https://png.pngitem.com/pimgs/s/36-369305_snake-clip-art-transparent-background-snake-clipart-hd.png"
+        height="70px" width="100px" id="snakeImg" style="position: absolute;">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSN690rhnlu9okcpxlvyEWF17NOB8x5pLP7dg&s" width="50px"
+        height="50px" id="eatingSub" style="position: absolute;">
+
+
+    <script>
+
+        currScore = 0;
+
+        currentLeft = 0;
+
+        iLeft = 0;
+        iTop = 0;
+
+        function moveObject(e){
+			if(e.key=="ArrowUp"){
+				startUp();
+			}else if(e.key=="ArrowDown"){
+				startDown();
+			}
+			else if(e.key=="ArrowLeft"){
+				startLeft();
+			}
+			else if(e.key=="ArrowRight"){
+				startRight();
+			}
+		}
+
+        function clearAllInterval(){
+			clearInterval(iLeft);
+			clearInterval(iTop);
+		}
+
+        function startLeft(){
+			clearAllInterval();
+			iLeft = setInterval(moveLeft,10);
+		}
+		function startRight(){
+			clearAllInterval();
+			iLeft = setInterval(moveRight,10);
+		}
+
+		function startUp(){
+			clearAllInterval();
+			iTop = setInterval(moveUp,10);
+		}
+		function startDown(){
+			clearAllInterval();
+			iTop = setInterval(moveDown,10);
+		}
+
+        function checkForScore(){
+			if(currentLeft+100>eatingSubLeft && currentLeft<eatingSubLeft+50 && currentTop+100>eatingSubTop && currentTop<eatingSubTop+50){
+				currScore++;
+				document.getElementById('myScore').innerHTML = "Current Score : "+currScore;
+				changeEatingSubPosition();
+			}
+		}
+
+        function moveLeft(){
+			currentLeft--;
+			if(currentLeft<30){
+				currentLeft=screen.availWidth-100;
+			}
+			checkForScore();
+			imgRef = document.getElementById('snakeImg');
+			imgRef.style.left = currentLeft+"px";
+			imgRef.style.transform="rotate(180deg)"
+		}
+
+        function moveRight(){
+			currentLeft++;
+            if(currentLeft>screen.availWidth-100){
+				currentLeft=0;
+			}
+			checkForScore();
+			imgRef = document.getElementById('snakeImg');
+			imgRef.style.left = currentLeft+"px";
+			imgRef.style.transform="rotate(0deg)"
+		}
+
+        currentTop = 0;
+
+		function moveUp(){
+			currentTop--;
+            if (currentTop < 0) {
+                currentTop = screen.availHeight-177;
+            }
+			checkForScore();
+			imgRef = document.getElementById('snakeImg');
+			imgRef.style.top = currentTop+"px";
+			imgRef.style.transform="rotate(270deg)"
+		}
+		function moveDown(){
+			currentTop++;
+            if (currentTop > screen.availHeight-167) {
+                currentTop = 0
+            }
+			checkForScore();
+			imgRef = document.getElementById('snakeImg');
+			imgRef.style.top = currentTop+"px";
+			imgRef.style.transform="rotate(90deg)"
+		}
+
+        eatingSubLeft=0;
+		eatingSubTop=0;
+		function changeEatingSubPosition(){
+			imgRefeatingSub = document.getElementById('eatingSub')
+			eatingSubLeft = parseInt(Math.random()*(screen.availWidth-50));
+			eatingSubTop = parseInt(Math.random()*(screen.availHeight-80-72));
+			imgRefeatingSub.style.left = eatingSubLeft+"px";
+			imgRefeatingSub.style.top = eatingSubTop+"px";
+		}
+		changeEatingSubPosition();
+
+		setInterval(changeEatingSubPosition,500)
+    </script>
+
+</body>
+
+</html>

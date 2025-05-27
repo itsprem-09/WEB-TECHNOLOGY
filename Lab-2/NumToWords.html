@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number to Words</title>
+</head>
+<body>
+    <script>
+        let n = parseInt(prompt("Enter Number : "));
+        function numToWords(n) {
+            if (n < 0 || n > 999) {
+            alert("Number is Out of Range");
+            }
+            else if (isNaN(n)) {
+                alert("Not A Number");
+            }
+            let units = ['zero' , 'one' , 'two' , 'three' , 'four' , 'five' , 'six' , 'seven' , 'eight' , 'nine'];
+            let tens = [ 'tewnty' , 'thirty' , 'forty' , 'fifty' , 'sixty' , 'seventy' , 'eighty' , 'ninty' ]
+            let teens = ['ten' , 'eleven' , 'twelve' , 'thirteen' , 'fourteen' , 'fifteen' , 'sixteen' , 'seventeen' , 'eighteen' , 'ninteen']
+
+            let result = '';
+            if (n >= 100) {
+                result += units[Math.floor(n/100) + 'hundred'];
+                n = n % 100;
+            }
+            if (n >= 20) {
+                result += tens[Math.floor(n / 10) - 2] + ' ';
+                n = n % 10;
+            }
+            else if (n >= 10) {
+                result += teens[n - 10] + ' ';
+                n = 0;
+            }
+            if (n > 0) {
+                result += units[n] + " ";
+            }
+            result = result.trim();
+        }
+        numToWords(n);
+    </script>
+</body>
+</html>
+

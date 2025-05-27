@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calc</title>
+</head>
+<body>
+    <script>
+        let a =parseInt(prompt("Enter First Number")); 
+        let s = prompt("Enter Operation");
+        let b =parseInt(prompt("Enter Secound Number")); 
+        let ans;
+        switch (s) {
+            case '+':
+                alert("Sum of Given Number is "+(a+b));
+                break;
+            case '-':
+                alert("Sub of Given Number is "+(a-b));
+                break;
+            case '*':
+                alert("Multiplication of Given Number is "+(a*b));
+                break;
+            case '/':
+                alert("Div of Given Number is "+(a/b));
+                break;
+            case '%':
+                alert("Modulas of Given Number is "+(a%b));
+                break;
+        
+            default:
+                alert("Invalid Operation");
+                break;
+        }
+    </script>
+</body>
+</html>

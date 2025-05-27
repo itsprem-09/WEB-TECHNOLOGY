@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let n = prompt("Enter Number ");
+        let arr = [1,2,3,4,5];
+        arr.push(n);
+        document.write("After Push : ",arr);
+        arr.pop();
+        document.write("After Pop :",arr);
+        arr.shift();
+        document.write("After Shift :",arr);
+        arr.unshift(3);
+        document.write("After Unshift : ",arr);
+        newarr = arr.slice(0,3);
+        document.write("After Slice : ",arr);
+        arr.splice(2,4);
+        document.write("After Splice : ",arr);
+        arr.sort();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 onmouseover="changeBg()" id="head">
+        Heading 1 Hover here for changing background Color
+    </h1>
+    <button id="fndtime" onclick="showTime()">Show Time</button>
+    <button id="red" onclick="red()">Change Bg to Red</button>
+    <button id="green" onclick="green()">Change Bg to Green</button>
+    <div id="show">
+
+    </div>
+
+    <script>
+        function changeBg() {
+            r = Math.random()*255;
+            g = Math.random()*255;
+            b = Math.random()*255;
+            document.getElementById('head').style.color = "rgb("+r+","+g+","+b+")";
+        }
+
+        function showTime() {
+            d = new Date();
+            document.getElementById('show').innerHTML = d.getHours()+" : "+d.getMinutes()+" : "+d.getSeconds();
+        }
+
+        function red() {
+            document.body.style.background = "red"
+        }
+        function green() {
+            document.body.style.background = "green"
+        }
+    </script>
+
+</body>
+</html>

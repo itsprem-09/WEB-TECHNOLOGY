@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Armstrong</title>
+</head>
+<body>
+    <script>
+        let n = prompt("Enter Number : ");
+        let count = 0;
+        let temp = n;
+        while (n > 0) {
+            count++;
+            n = parseInt(n / 10);
+        }
+        n = temp;
+        let sum = 0;
+        while (n > 0 ) {
+            let ld = n % 10;
+            sum = sum + Math.pow(ld, count);
+            n = parseInt(n / 10);
+        }
+        if (sum == temp) {
+            alert("Armstrong");
+        } else {
+            alert("Non Armstrong");
+        }
+    </script>
+</body>
+</html>

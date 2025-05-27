@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Array of product objects
+        let products = [
+            {
+                id: 1,
+                name: "Laptop",
+                price: 1200,
+                category: "Electronics",
+                description: "High-performance laptop with SSD storage."
+            },
+            {
+                id: 2,
+                name: "Smartphone",
+                price: 800,
+                category: "Electronics",
+                description: "5G-enabled smartphone with OLED display."
+            },
+            {
+                id: 3,
+                name: "Watch",
+                price: 300,
+                category: "Fashion",
+                description: "Water-resistant smartwatch with heart rate monitor."
+            },
+            {
+                id: 4,
+                name: "Headphones",
+                price: 150,
+                category: "Electronics",
+                description: "Noise-canceling headphones with Bluetooth connectivity."
+            },
+            {
+                id: 5,
+                name: "Backpack",
+                price: 80,
+                category: "Travel",
+                description: "Durable backpack with multiple compartments."
+            }
+        ];
+
+        document.write('<table border = 1 cellspacing="0">')
+        document.write('<tr align="center">')
+        document.write("<td>Name</td>");
+        document.write("<td>Id</td>");
+        document.write("<td>Price</td>");
+        document.write("<td>Category</td>");
+        document.write("<td>Description</td>");
+        document.write("</tr>")
+
+        for (let i = 0; i < products.length; i++) {
+            document.write("<tr>")
+            document.write("<td>" + products[i].name + "</td>")
+            document.write("<td>" + products[i].id + "</td>")
+            document.write("<td>" + products[i].price + "</td>")
+            document.write("<td>" + products[i].category + "</td>")
+            document.write("<td>" + products[i].description + "</td>")
+            document.write("</tr>")
+        }
+        document.write("</table>")
+    </script>
+</body>
+
+</html>

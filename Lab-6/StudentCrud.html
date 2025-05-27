@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #result {
+            margin-top: 50px;
+            font-size: xx-large;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text" id="txtData" placeholder="Enter Student Name" \>
+    <button id="btn" onclick="addStudents()">Add</button>
+    <span id="errMsg" style="color: red;"></span>
+
+    <div id="result">
+        AHDKA
+    </div>
+
+    <script>
+
+        students = ['prem', 'jani', 'rajkot', 'gujarat', 'india']
+
+        idToEdit = -1;
+
+        function displayStudent() {
+            temp = document.getElementById("result");
+            tempString = "";
+            tempString += "<table border='1'>";
+            for (i = 0; i < students.length; i++) {
+                tempString += "<tr>";
+                tempString += "<td>" + students[i] + "</td>";
+                tempString += "<td><button onclick='deleteStudent(" + i + ")'>Delete</button></td>";
+                tempString += "<td><button onclick='setStudent(" + i + ")'>Edit</button></td>";
+                tempString += "</tr>";
+            }
+            tempString += "</table>";
+
+            temp.innerHTML = tempString;
+        }
+        displayStudent();
+
+        function setStudent(id) {
+            idToEdit = id;
+            document.getElementById('btn').innerHTML = "Edit"
+            document.getElementById('txtData').value = students[id]
+        }
+
+        function addStudents() {
+            newStudent = document.getElementById('txtData');
+            if (newStudent.value == "") {
+                //invalid
+                newStudent.style.border = "2px solid red";
+                document.getElementById('errMsg').innerHTML = "Please Enter Name"
+            }
+            else {
+                if (idToEdit >= 0) {
+                    students[idToEdit] = newStudent.value;
+                    idToEdit = -1;
+                    document.getElementById('btn').innerHTML = "Add";
+                }
+                else {
+                    students.push(newStudent.value);
+                }
+                newStudent.value = ""
+                displayStudent();
+            }
+        }
+
+        function deleteStudent(id) {
+            temp = confirm("Are You Sure ??")
+            if (temp) {
+                students.splice(id, 1);
+            }
+            displayStudent();
+        }
+    </script>
+
+</body>
+
+</html>

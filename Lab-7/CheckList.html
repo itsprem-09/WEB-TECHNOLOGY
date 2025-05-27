@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Roll No.</h1>
+    <input type="number" style="width: 200px; margin-bottom: 15px;" placeholder="Enter Total Number of Roll No." id="num">
+    <button id="btnList" onclick="getList()">Get List</button>
+    <div id="showRollNo" style="font-size: 19px;">
+
+    </div>
+    <br>
+    <button id="getList" onclick="showList()">Show List</button>
+    <br>
+    <div id="showList" style="margin-top: 15px; font-size: 20px;">
+
+    </div>
+
+    <script>
+
+        function getList() {
+            n = document.getElementById('num').value;
+
+            let rollDiv = document.getElementById('showRollNo');
+
+            let temp = "";
+            for (let i = 1; i <= n; i++) {
+                temp += "<input id=" + i + " type='checkbox'> <label for=" + i + ">" + i + "</label> <br>";
+                rollDiv.innerHTML = temp;
+            }
+
+        }
+
+        let numbers = [];
+        function showList() {
+            n = document.getElementById('num').value;
+            let list = document.getElementById('showList');
+
+
+            for (let i = 1; i <= n; i++) {
+                let temp = document.getElementById(i);
+
+                if (temp.checked) {
+                    numbers.push(i);
+                    console.log(numbers);
+                }
+            }
+            list.innerHTML = "Present Numbers are : " + numbers + "<br> Present Count : " + numbers.length;
+            console.log("hellp" + numbers);
+            numbers = []
+        }
+
+    </script>
+
+</body>
+
+</html>

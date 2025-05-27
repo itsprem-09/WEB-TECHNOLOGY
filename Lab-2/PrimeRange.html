@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prime Range</title>
+</head>
+<body>
+    <script>
+        let a = prompt("Enter Starting Number : ")
+        let b = prompt("Enter Ending Number : ")
+        for (let i = a; i <= b; i++) {
+            if (isPrime(i)) {
+                document.write(i+"<br>");
+            }
+        }
+        function isPrime(n) {
+            if(n == 0 || n == 1){
+                return false;
+            }
+            for (let i = 2; i <= Math.sqrt(n); i++) {
+                if (n % i == 0) {
+                    return false;
+                }
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>

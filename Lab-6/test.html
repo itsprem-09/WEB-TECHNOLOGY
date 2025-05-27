@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="mydiv">
+        Red
+    </div>
+
+    <script>
+        var a = document.getElementById('mydiv');
+        var colors = ['red', 'blue', 'orange', 'green'];    
+        var next = 0;
+
+        setInterval("a.style.backgroundColor = colors[next++%colors.length]", 500);
+    </script>
+</body>
+</html>

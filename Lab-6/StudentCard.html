@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <style>
+        input {
+            margin-right: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="d-flex justify-content-center">
+        <nav class="navbar bg-body-tertiary">
+            <form class="container-fluid justify-content-start">
+                <button onclick="displayStudent()" class="btn btn-outline-primary me-2" type="button">Students</button>
+                <button onclick="displayFaculty()" class="btn btn-outline-primary me-2" type="button">Faculty</button>
+            </form>
+        </nav>
+    </div>
+
+    <div style="display: flex; justify-content: center; margin-top: 15px; margin-bottom: 15px;">
+        <input type="text" placeholder="Enter ID Of Student : " id="txtId">
+        <input type="text" placeholder="Enter Name Of Student : " id="txtName">
+        <input type="text" placeholder="Enter Roll No. Of Student : " id="txtRollNo">
+        <input type="text" placeholder="Enter Link of an image Of Student : " id="txtAvatar">
+    </div>
+
+    <div style="display: flex; justify-content: center;">
+        <button class="btn btn-outline-primary" onclick="check()" id="btnAdd">Add</button>
+    </div>
+
+    <div id="showResult" style="margin-top: 50px;">
+
+    </div>
+
+    <script>
+        students = [
+            {
+                "createdAt": "2024-06-18T00:44:58.827Z",
+                "name": "Horace Nolan",
+                "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/201.jpg",
+                "rollNo": 49122,
+                "id": "1",
+            },
+            {
+                "createdAt": "2024-06-17T19:31:22.399Z",
+                "name": "Lynda Hahn Sr.",
+                "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/50.jpg",
+                "rollNo": 82836,
+                "id": "2"
+            },
+            {
+                "createdAt": "2024-06-17T12:51:11.824Z",
+                "name": "Bradford Jakubowski",
+                "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/45.jpg",
+                "rollNo": 83415,
+                "id": "3"
+            },
+            {
+                "createdAt": "2024-06-18T00:22:13.137Z",
+                "name": "Kent Paucek",
+                "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1066.jpg",
+                "rollNo": 134,
+                "id": "4"
+            },
+            {
+                "createdAt": "2024-06-17T10:42:51.758Z",
+                "name": "Connie Upton",
+                "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/154.jpg",
+                "rollNo": 72112,
+                "id": "5"
+            },
+            {
+                "createdAt": "2024-06-17T20:39:16.933Z",
+                "name": "Josefina Toy",
+                "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/396.jpg",
+                "rollNo": 54213,
+                "id": "6"
+            },
+            {
+                "createdAt": "2024-06-17T23:08:13.664Z",
+                "name": "Gordon Davis",
+                "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/311.jpg",
+                "rollNo": 61535,
+                "id": "7"
+            },
+            {
+                "createdAt": "2024-06-17T09:30:18.921Z",
+                "name": "Ms. Cynthia Abernathy",
+                "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/5.jpg",
+                "rollNo": 75871,
+                "id": "8"
+            },
+            {
+                "createdAt": "2024-06-17T16:00:47.527Z",
+                "name": "Ms. Rafael Turcotte",
+                "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/15.jpg",
+                "rollNo": 83080,
+                "id": "9"
+            },
+            {
+                "createdAt": "2024-06-17T18:57:32.285Z",
+                "name": "Adrienne Leuschke I",
+                "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/129.jpg",
+                "rollNo": 43252,
+                "id": "10"
+            },
+            {
+                "createdAt": "2024-06-17T23:12:18.677Z",
+                "name": "Lora Mertz",
+                "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/365.jpg",
+                "rollNo": 7802,
+                "id": "11"
+            },
+            {
+                "createdAt": "2024-06-17T18:21:21.643Z",
+                "name": "Ruby Leannon Jr.",
+                "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1230.jpg",
+                "rollNo": 92907,
+                "id": "12"
+            },
+            {
+                "createdAt": "2024-06-17T06:28:17.392Z",
+                "name": "Ollie Dibbert",
+                "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/457.jpg",
+                "rollNo": 14324,
+                "id": "13"
+            },
+            {
+                "createdAt": "2024-06-17T08:15:42.102Z",
+                "name": "Cecelia Jast V",
+                "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1008.jpg",
+                "rollNo": 38564,
+                "id": "14"
+            },
+            {
+                "createdAt": "2024-06-17T19:28:11.012Z",
+                "name": "Santiago Murphy",
+                "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/374.jpg",
+                "rollNo": 56799,
+                "id": "15"
+            },
+            {
+                "createdAt": "2024-06-18T00:38:51.772Z",
+                "name": "Marcella Jacobs",
+                "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/509.jpg",
+                "rollNo": 65879,
+                "id": "16"
+            },
+            {
+                "createdAt": "2024-06-17T15:50:55.674Z",
+                "name": "Rodolfo Prohaska",
+                "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/791.jpg",
+                "rollNo": 55374,
+                "id": "17"
+            },
+            {
+                "createdAt": "2024-06-17T23:54:36.649Z",
+                "name": "Jeremy Walker IV",
+                "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/855.jpg",
+                "rollNo": 32522,
+                "id": "18"
+            },
+            {
+                "createdAt": "2024-06-17T11:57:12.925Z",
+                "name": "Mr. Elmer Mohr",
+                "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/285.jpg",
+                "rollNo": 85203,
+                "id": "19"
+            },
+            {
+                "createdAt": "2024-06-18T05:04:58.207Z",
+                "name": "Marlon Russel",
+                "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/406.jpg",
+                "rollNo": 1849,
+                "id": "20"
+            }
+        ];
+
+        faculties = [
+            {
+                "createdAt": "2024-07-08T04:08:40.646Z",
+                "name": "Alonzo Sporer",
+                "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/194.jpg",
+                "Department": "Home",
+                "City": "Mackport",
+                "id": "1"
+            },
+            {
+                "createdAt": "2024-07-08T23:57:17.937Z",
+                "name": "Elaine Nienow",
+                "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/259.jpg",
+                "Department": "Health",
+                "City": "Willmsworth",
+                "id": "2"
+            },
+            {
+                "createdAt": "2024-07-08T13:42:44.307Z",
+                "name": "Jordan Muller",
+                "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/615.jpg",
+                "Department": "Music",
+                "City": "Lubowitzland",
+                "id": "3"
+            },
+            {
+                "createdAt": "2024-07-08T15:56:28.928Z",
+                "name": "Ms. Kerry Stracke",
+                "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/725.jpg",
+                "Department": "Games",
+                "City": "Fort Carmenborough",
+                "id": "4"
+            },
+            {
+                "createdAt": "2024-07-08T11:26:13.577Z",
+                "name": "Winston Stark",
+                "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/616.jpg",
+                "Department": "Tools",
+                "City": "Ayanaport",
+                "id": "5"
+            },
+            {
+                "createdAt": "2024-07-09T03:05:58.351Z",
+                "name": "Nicholas Mosciski",
+                "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/338.jpg",
+                "Department": "Sports",
+                "City": "Woodland",
+                "id": "6"
+            },
+            {
+                "createdAt": "2024-07-08T17:50:21.200Z",
+                "name": "Sue Simonis",
+                "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1193.jpg",
+                "Department": "Toys",
+                "City": "Clarksville",
+                "id": "7"
+            },
+            {
+                "createdAt": "2024-07-08T09:00:33.855Z",
+                "name": "Jeannie Collier",
+                "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/65.jpg",
+                "Department": "Baby",
+                "City": "East Estevan",
+                "id": "8"
+            },
+            {
+                "createdAt": "2024-07-08T06:26:01.735Z",
+                "name": "Manuel D'Amore",
+                "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/829.jpg",
+                "Department": "Home",
+                "City": "New Gina",
+                "id": "9"
+            },
+            {
+                "createdAt": "2024-07-08T11:42:37.864Z",
+                "name": "Eddie O'Conner",
+                "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/837.jpg",
+                "Department": "Books",
+                "City": "South Darrickport",
+                "id": "10"
+            },
+            {
+                "createdAt": "2024-07-08T17:18:03.264Z",
+                "name": "Seth Schuppe",
+                "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/935.jpg",
+                "Department": "Tools",
+                "City": "Litteltown",
+                "id": "11"
+            },
+            {
+                "createdAt": "2024-07-08T17:31:38.172Z",
+                "name": "Dr. Kimberly Lesch I",
+                "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/249.jpg",
+                "Department": "Games",
+                "City": "Fort Keyshawncester",
+                "id": "12"
+            },
+            {
+                "createdAt": "2024-07-08T11:09:07.000Z",
+                "name": "Diana Pfannerstill Sr.",
+                "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/148.jpg",
+                "Department": "Health",
+                "City": "Minneapolis",
+                "id": "13"
+            },
+            {
+                "createdAt": "2024-07-09T01:50:46.938Z",
+                "name": "Randal Johnston",
+                "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1225.jpg",
+                "Department": "Industrial",
+                "City": "Carlsbad",
+                "id": "14"
+            },
+            {
+                "createdAt": "2024-07-08T12:27:40.665Z",
+                "name": "Angelica Rowe",
+                "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/869.jpg",
+                "Department": "Clothing",
+                "City": "Kuhnfort",
+                "id": "15"
+            },
+            {
+                "createdAt": "2024-07-08T13:24:05.124Z",
+                "name": "Flora Bechtelar",
+                "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/440.jpg",
+                "Department": "Automotive",
+                "City": "Miloland",
+                "id": "16"
+            },
+            {
+                "createdAt": "2024-07-08T14:49:07.334Z",
+                "name": "Maggie Lind",
+                "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1080.jpg",
+                "Department": "Books",
+                "City": "North Barryburgh",
+                "id": "17"
+            },
+            {
+                "createdAt": "2024-07-08T21:56:39.052Z",
+                "name": "Vivian Fay Sr.",
+                "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/280.jpg",
+                "Department": "Beauty",
+                "City": "Schillerland",
+                "id": "18"
+            },
+            {
+                "createdAt": "2024-07-09T01:52:44.144Z",
+                "name": "Dr. Donnie Murphy",
+                "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/175.jpg",
+                "Department": "Jewelery",
+                "City": "East Julientown",
+                "id": "19"
+            },
+            {
+                "createdAt": "2024-07-08T14:44:24.497Z",
+                "name": "Clifford Leannon",
+                "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/19.jpg",
+                "Department": "Garden",
+                "City": "Fort Reba",
+                "id": "20"
+            }
+        ]
+
+        idToEdit = -1;
+
+        let isStudent = false;
+
+        function displayStudent() {
+            isStudent = true;
+            temp = document.getElementById('showResult');
+            tempString = "";
+            tempString += "<div class='row  g-3'>"
+
+
+            for (let i = 0; i < students.length; i++) {
+                tempString += "<div class='col-3 d-flex justify-content-center'>"
+                tempString += '<div class="card" style="width:280px;">'
+                tempString += '<img src="' + students[i].avatar + '" class="card-img-top" alt="...">'
+                tempString += '<div class="card-body">'
+                tempString += '<h5 class="card-title">' + students[i].name + '</h5>'
+                tempString += '<h5 class="card-text">ID : ' + students[i].id + '</h5>'
+                tempString += '<h5 class="card-text">Roll No. : ' + students[i].rollNo + '</h5>'
+                tempString += '<p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>'
+                tempString += '</div>'
+                tempString += '<div class="card-footer" >'
+                tempString += "<small class='d-flex justify-content-center text-body-secondary'><button style='margin-right:5px;'' onclick='deleteStudent(" + i + ")' class='btn btn-outline-danger'>Delete</button><button onclick='setStu(" + i + ")' class='btn btn-outline-success'>Edit</button></small>"
+                tempString += '</div>'
+                tempString += '</div>'
+                tempString += '</div>'
+            }
+
+            tempString += '</div>'
+            temp.innerHTML = tempString;
+        }
+
+        function displayFaculty() {
+            isStudent = false;
+
+            document.getElementById('txtId').placeholder = "Enter Faculty ID :"
+            document.getElementById('txtName').placeholder = "Enter Faculty Name :"
+            document.getElementById('txtRollNo').placeholder = "Enter Departmenent of Faculty :"
+            document.getElementById('txtAvatar').placeholder = "Enter Link of an image Of faculty : "
+
+            temp = document.getElementById('showResult');
+            tempString = "";
+            tempString += "<div class='row  g-3'>"
+
+            for (let i = 0; i < faculties.length; i++) {
+                tempString += "<div class='col-3 d-flex justify-content-center'>"
+                tempString += '<div class="card" style="width:280px;">'
+                tempString += '<img src="' + faculties[i].avatar + '" class="card-img-top" alt="...">'
+                tempString += '<div class="card-body">'
+                tempString += '<h5 class="card-title">' + faculties[i].name + '</h5>'
+                tempString += '<h5 class="card-text">ID : ' + faculties[i].id + '</h5>'
+                tempString += '<h5 class="card-text">Department : ' + faculties[i].Department + '</h5>'
+                tempString += '<p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>'
+                tempString += '</div>'
+                tempString += '<div class="card-footer" >'
+                tempString += '<small class="d-flex justify-content-center text-body-secondary"><button onclick="deleteFaculty(' + i + ')" style="margin-right:5px;" class="btn btn-outline-danger">Delete</button><button onclick="setFaculty(' + i + ')"  class="btn btn-outline-success">Edit</button></small>'
+                tempString += '</div>'
+                tempString += '</div>'
+                tempString += '</div>'
+            }
+            tempString += '</div>'
+            temp.innerHTML = tempString;
+        }
+
+        function check(){
+            if (isStudent) {
+                addStudent();
+            }
+            else{
+                addFaculty();
+            }
+        }
+
+        function addStudent() {
+            tempObj = {
+                createdAt: students[0].createdAt,
+                name: document.getElementById('txtName').value,
+                avatar: document.getElementById('txtAvatar').value,
+                rollNo: document.getElementById('txtRollNo').value,
+                id: document.getElementById('txtId').value,
+            }
+            if (tempObj.name == "") {
+                //invalid
+                document.getElementById('txtName').style.border = "2px solid red";
+            }
+            else {
+                document.getElementById('txtName').style.border = "1px solid black";
+                if (idToEdit >= 0) {
+                    students[idToEdit] = tempObj;
+                    idToEdit = -1;
+                    document.getElementById('btnAdd').innerHTML = "Add";
+                }
+                else {
+                    students.push(tempObj);
+                }
+
+                document.getElementById('txtId').value = ""
+                document.getElementById('txtName').value = ""
+                document.getElementById('txtRollNo').value = ""
+                document.getElementById('txtAvatar').value = ""
+                displayStudent();
+            }
+        }
+
+        function setStu(id) {
+            idToEdit = id;
+            document.getElementById('btnAdd').innerHTML = "Edit"
+            document.getElementById('txtName').value = students[id].name;
+            document.getElementById('txtId').value = students[id].id;
+            document.getElementById('txtRollNo').value = students[id].rollNo;
+            document.getElementById('txtAvatar').value = students[id].avatar;
+
+        }
+        function deleteStudent(id) {
+
+            students.splice(id, 1);
+            displayStudent();
+        }
+
+        function setFaculty(id) {
+            idToEdit = id;
+            document.getElementById('btnAdd').innerHTML = "Edit"
+            document.getElementById('txtName').value = faculties[id].name;
+            document.getElementById('txtId').value = faculties[id].id;
+            document.getElementById('txtRollNo').value = faculties[id].Department;
+            document.getElementById('txtAvatar').value = faculties[id].avatar;
+
+        }
+
+        function deleteFaculty(id) {
+
+            faculties.splice(id, 1);
+            displayFaculty();
+        }
+
+        function addFaculty() {
+            tempObj = {
+                createdAt: faculties[0].createdAt,
+                name: document.getElementById('txtName').value,
+                avatar: document.getElementById('txtAvatar').value,
+                Department: document.getElementById('txtRollNo').value,
+                City: "Fort Reba",
+                id: document.getElementById('txtId').value,
+            }
+            if (tempObj.name == "") {
+                //invalid
+                document.getElementById('txtName').style.border = "2px solid red";
+            }
+            else {
+                document.getElementById('txtName').style.border = "1px solid black";
+                if (idToEdit >= 0) {
+                    faculties[idToEdit] = tempObj;
+                    idToEdit = -1;
+                    document.getElementById('btnAdd').innerHTML = "Add";
+                }
+                else {
+                    faculties.push(tempObj);
+                }
+
+                document.getElementById('txtId').value = ""
+                document.getElementById('txtName').value = ""
+                document.getElementById('txtRollNo').value = ""
+                document.getElementById('txtAvatar').value = ""
+                displayFaculty();
+            }
+        }
+    </script>
+
+</body>
+
+</html>

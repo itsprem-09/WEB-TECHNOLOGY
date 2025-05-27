@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Change Bg Color</title>
+    <style>
+        #mouse{
+            margin-top: 50px;
+            font-size: xx-large;
+        }
+        #result{
+            float: right;
+            margin-right: 250px;
+        }
+        #keyboard{
+            margin-top: 50px;
+            font-size: xx-large;
+        }
+    </style>
+</head>
+<body id="body">
+    <button id="colorBtn" onclick="changeColor()">Click Here For Changing Bg Color</button>
+    
+    <div id="mouse" >
+        Mouse Event :
+    </div>
+
+    <div id="keyboard">
+        Keyboard Event :
+    </div>
+
+    <div id="type" style="margin-top: 50px;">
+        <input type="text" id="changeType" >
+        <button id="colorBtn" onclick="changeType()">Submit</button>
+    </div>
+    
+
+
+    <script>
+
+        document.addEventListener('click',()=> display("click"))
+        document.addEventListener('dblclick',()=> display("Double click"))
+        document.addEventListener('mouseout',()=> display("Mouse Out"))
+        document.addEventListener('mousemove',()=> display("Mouse Move"))
+
+        document.addEventListener('keydown',(e)=>{
+            document.getElementById('keyboard').innerHTML = "Keyboard Event : "+(e.key);
+        })
+
+        function display(str) {
+            document.getElementById('mouse').innerHTML = "Mouse Event : "+str;
+        }
+
+        function changeColor() {
+            r = Math.random()*255;
+            g = Math.random()*255;
+            b = Math.random()*255;
+            document.getElementById('body').style.backgroundColor = "rgb("+r+","+g+","+b+")";
+            setInterval(changeColor,1500)
+        }
+
+        let val = document.getElementById('changeType');
+        
+        let isClicked = false;
+
+        function changeType() {
+            let type = val.value;
+            if (isClicked) {
+                val.type = type;
+            }
+            else{
+                val.type = "text";
+                val.value = '';
+            }
+            isClicked = !isClicked;
+        }
+        
+    </script>
+
+</body>
+</html>

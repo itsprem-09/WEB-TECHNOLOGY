@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shooting Game</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        #scoreplace {
+            font-size: 30px;
+            color: blue;
+            user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 id="scoreplace">
+        Current Score : 0
+    </h1>
+    <img style="position: absolute" id="myImg" src="https://media.moddb.com/images/games/1/58/57618/512x512bb.jpg"
+        onclick="addscore()" width="60px" />
+
+    <script>
+        i = 0;
+        currentscore = 0;
+        function addscore() {
+            currentscore++;
+            checkSpeed();
+            changeposition();
+        }
+
+        document.getElementById('myImg').style.left = parseInt(Math.random() * 1100)+"px";
+        document.getElementById('myImg').style.top = parseInt(Math.random() * 450)+"px";
+        function changeposition() {
+            //1366*768
+            leftPos = parseInt(Math.random() * 1100)
+            topPos = parseInt(Math.random() * 450)
+            document.getElementById('myImg').style.top = topPos + "px";
+            document.getElementById('myImg').style.left = leftPos + "px";
+
+            document.getElementById('scoreplace').innerHTML = "Current Score : "+currentscore;
+            console.log(currentscore);
+        }
+
+        function checkSpeed() {
+            if (currentscore < 2) {
+                i = setInterval(changeposition, 2000);
+            }
+            else{
+                clearInterval(i);
+                setInterval(changeposition, 10);
+            }
+        }
+        
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body onkeyup="changeBg()">
+    <input type="text" onkeypress="keypress(event)">
+    <div id="div-main" style="margin-top: 20px;">
+
+    </div>
+    <div id="vowel" style="margin-top: 30px;">
+
+    </div>
+
+    <script>
+        function keypress(e) {
+            console.log(e);
+            document.getElementById('div-main').innerHTML = e.keyCode+" Pressed in keyboard"
+            if (e.key == 'a' || e.key == 'e' || e.key == 'i' || e.key == 'o' || e.key == 'u') {
+                document.getElementById('vowel').innerHTML = "Vowel is Pressed"
+            } 
+        }
+
+        function changeBg() {
+            r = Math.random()*255;
+            g = Math.random()*255;
+            b = Math.random()*255;
+            document.body.style.backgroundColor = "rgb("+r+","+g+","+b+")";
+        }
+    </script>
+
+</body>
+</html>

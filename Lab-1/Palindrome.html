@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palindrome</title>
+</head>
+<body>
+    <script>
+        let n = prompt("Enter Number :");
+        let temp = n;
+        let sum = 0;
+        while(n>0){
+            let rem = n % 10;
+            sum = sum * 10 + rem;
+            n = parseInt(n/10);
+        }
+        if(temp == sum){
+            alert("Palindrome");
+        }
+        else{
+            alert("Non Palindrome");
+        }
+    </script>
+</body>
+</html>

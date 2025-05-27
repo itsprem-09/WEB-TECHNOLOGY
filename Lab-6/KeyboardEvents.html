@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Keyboard</title>
+</head>
+<body>
+	<h1>Keyboard Events</h1>
+	<input id="key" type="text">
+	<div id="warning" style="color: red;">Username can't be empty</div>
+	<input type="button" name="submit" value="Submit" onclick="validate()" id="name">
+	<script type="text/javascript">
+		a=document.getElementById('key');
+		event=document.getElementById('warning');
+		key.addEventListener(
+			'keydown',(a)=>{
+				event.innerHTML=""
+			}
+		);
+		key.addEventListener(
+			'keyup',(a)=>{
+				event.innerHTML=""
+			}
+		);
+		key.addEventListener(
+			'keypress',(a)=>{
+				event.innerHTML=""
+			}
+		);
+		function validate(){
+			username=document.getElementById("name").value;
+			if(username.trim().length<8){
+				document.getElementById("warning").innerHTML="Username can't be empty";
+			}
+		}
+	</script>
+</body>
+</html>

@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Scientifc Calculator</title>
+	<style type="text/css">
+		body{
+			width: 24%;
+			padding: 10px;
+		}
+		.main{
+			border: 2px solid black;
+			padding: 13px;
+			text-align: center;
+		}
+		#answerId{
+			width: 269px;
+			height: 56px;
+			margin-top: 4px;
+			margin-bottom: 4px;
+		}
+		.button{
+			width: 50px;
+			height: 40px;
+			margin-top: 2px;
+			margin-bottom: 2px;
+		}
+		.button1{
+			width: 64px;
+		}
+	</style>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+	<div class="main">
+		<form id="main">
+			<div id="output">
+				<input type="text" name="answerPanel" id="answerId">
+			</div>
+			<div>
+				<input type="button" value="sin" class="button" onclick="sin()">
+				<input type="button" value="cos" class="button" onclick="cos()">
+				<input type="button" value="tan" class="button" onclick="tan()">
+				<input type="radio" name="angle" id="deg" checked value="deg" style="margin-left: 10px; margin-right: 3px;" onclick="answerPanel.value+=''">deg
+				<input type="radio" name="angle" id="rad" value="rad" style="margin-left: 10px; margin-right: 3px;" onclick="answerPanel.value+=''">rad
+			</div>
+			<div>
+				<input type="button" value="sin⁻¹" class="button" onclick="asin()">
+				<input type="button" value="cos⁻¹" class="button" onclick="acos()">
+				<input type="button" value="tan⁻¹" class="button" onclick="atan()">
+				<input type="button" value="π" class="button" onclick="pi()">
+				<input type="button" value="e" class="button" onclick="e()">
+			</div>
+			<div>
+				<input type="button" value="yˣ" class="button" onclick="answerPanel.value+='^'">
+				<input type="button" value="x³" class="button" onclick="cube()">
+				<input type="button" value="x²" class="button" onclick="squareX()">
+				<input type="button" value="eˣ" class="button" onclick="eRaisedtoX()">
+				<input type="button" value="10ˣ" class="button" onclick="tenRaisedtoX()">
+			</div>
+			<div>
+				<input type="button" value="y√x" class="button" onclick="answerPanel.value+='√'">
+				<input type="button" value="∛" class="button" onclick="cuberoot()">
+				<input type="button" value="√x" class="button" onclick="rootX()">
+				<input type="button" value="ln" class="button" onclick="log()">
+				<input type="button" value="log" class="button" onclick="log10()">
+			</div>
+			<div>
+				<input type="button" value="(" class="button" onclick="answerPanel.value+='('">
+				<input type="button" value=")" class="button" onclick="answerPanel.value+=')'">
+				<input type="button" value="nCr" class="button" onclick="answerPanel.value+='C'">
+				<input type="button" value="nPr" class="button" onclick="answerPanel.value+='P'">
+				<input type="button" value="n!" class="button" onclick="answerPanel.value+='!'">
+			</div>
+			<div>
+				<input type="button" value="←" class="button button1" onclick="back()">
+				<input type="button" value="+/-" class="button button1" onclick="signChange()">
+				<input type="button" value="C" class="button button1" onclick="answerPanel.value=''">
+				<input type="button" value="AC" class="button button1" onclick="answerPanel.value=''">
+			</div>
+			<div>
+				<input type="button" value="RND" class="button button1" onclick="random()">
+				<input type="button" value="EXP" class="button button1" onclick="answerPanel.value+=''">
+				<input type="button" value="%" class="button button1" onclick="answerPanel.value+='%'">
+				<input type="button" value="ANS" class="button button1" onclick="store()">
+			</div>
+			<div>
+				<input type="button" value="1/x" class="button button1" onclick="oneByX()">
+				<input type="button" value="x²" class="button button1" onclick="squareX()">
+				<input type="button" value="√x" class="button button1" onclick="rootX()">
+				<input type="button" value="/" class="button button1" onclick="answerPanel.value+='/'">
+			</div>
+			<div>
+				<input type="button" value="7" class="button button1" onclick="answerPanel.value+='7'">
+				<input type="button" value="8" class="button button1" onclick="answerPanel.value+='8'">
+				<input type="button" value="9" class="button button1" onclick="answerPanel.value+='9'">
+				<input type="button" value="*" class="button button1" onclick="answerPanel.value+='*'">
+			</div>
+			<div>
+				<input type="button" value="4" class="button button1" onclick="answerPanel.value+='4'">
+				<input type="button" value="5" class="button button1" onclick="answerPanel.value+='5'">
+				<input type="button" value="6" class="button button1" onclick="answerPanel.value+='6'">
+				<input type="button" value="-" class="button button1" onclick="answerPanel.value+='-'">
+			</div>
+			<div>
+				<input type="button" value="1" class="button button1" onclick="answerPanel.value+='1'">
+				<input type="button" value="2" class="button button1" onclick="answerPanel.value+='2'">
+				<input type="button" value="3" class="button button1" onclick="answerPanel.value+='3'">
+				<input type="button" value="+" class="button button1" onclick="answerPanel.value+='+'">
+			</div>
+			<div>
+				<input type="button" value="00" class="button button1" onclick="answerPanel.value+='00'">
+				<input type="button" value="0" class="button button1" onclick="answerPanel.value+='0'">
+				<input type="button" value="." class="button button1" onclick="answerPanel.value+='.'">
+				<input type="button" value="=" class="button button1" onclick="answer()">
+			</div>
+		</form>
+	</div>
+	<script>
+		function answer(){
+			let input=document.getElementById("answerId");
+			let exp=input.value;
+			for(i=0;i<exp.length;i++){
+				if(exp.charAt(i)=='+'){
+					c=exp.split("+");
+					let a=parseInt(c[0]);
+					let b=parseInt(c[1]);
+					input.value=a+b;
+				}
+				if(exp.charAt(i)=='-'){
+					c=exp.split("-");
+					let a=parseInt(c[0]);
+					let b=parseInt(c[1]);
+					input.value=a-b;
+				}
+				if(exp.charAt(i)=='*'){
+					c=exp.split("*");
+					let a=parseInt(c[0]);
+					let b=parseInt(c[1]);
+					input.value=a*b;
+				}
+				if(exp.charAt(i)=='/'){
+					c=exp.split("/");
+					let a=parseInt(c[0]);
+					let b=parseInt(c[1]);
+					input.value=a/b;
+				}
+				if(exp.charAt(i)=='%'){
+					c=exp.split("/");
+					let a=parseInt(c[0]);
+					let b=parseInt(c[1]);
+					input.value=a%b;
+				}
+				if(exp.charAt(i)=='C'){
+					c=exp.split("C");
+					let a=parseInt(c[0]);
+					let b=parseInt(c[1]);
+					input.value=factorial(a)/(factorial(b)*factorial(a-b));
+				}
+				if(exp.charAt(i)=='P'){
+					c=exp.split("P");
+					let a=parseInt(c[0]);
+					let b=parseInt(c[1]);
+					input.value=factorial(a)/factorial(a-b);
+				}
+				if(exp.charAt(i)=='!'){
+					c=exp.split("!");
+					let a=parseInt(c[0]);
+					input.value=factorial(a);
+				}
+				if(exp.charAt(i)=='√'){
+					c=exp.split("√");
+					let a=parseInt(c[0]);
+					let b=parseInt(c[1]);
+					input.value=a*Math.sqrt(b);
+				}
+				if(exp.charAt(i)=='^'){
+					c=exp.split("^");
+					let a=parseInt(c[0]);
+					let b=parseInt(c[1]);
+					let ans=1;
+					for(i=1;i<=b;i++){
+						ans*=a;
+					}
+					input.value=ans;
+				}
+				if(exp.charAt(i)=='e'){
+					if(flag==1){
+						c=exp.split("^");
+						let a=parseInt(c[1]);
+						ans=1;
+						for(i=1;i<=a;i++){
+							ans*=Math.E;
+						}
+						input.value=ans;
+					}else{
+						c=exp.split("^");
+						let a=parseInt(c[1]);
+						ans=1;
+						for(i=1;i<=a;i++){
+							ans*=Math.E;
+						}
+						input.value=parseInt(c[0])*ans;
+					}
+				}
+				if(exp.charAt(i)=='10'){
+					c=exp.split("^");
+					let a=parseInt(c[1]);
+					ans=1;
+					for(i=1;i<=a;i++){
+						ans*=10;
+					}
+					input.value=ans;
+				}
+				if(exp.includes("sin")){
+					let deg=document.getElementById("deg");
+					c=exp.split(" ");
+					let a=parseInt(c[1]);
+					if(deg.checked){
+						b=a*(Math.PI/180);
+						input.value=Math.sin(b);
+					}
+					else{
+						input.value=Math.sin(a);
+					}
+				}
+				if(exp.includes("cos")){
+					let deg=document.getElementById("deg");
+					c=exp.split(" ");
+					let a=parseInt(c[1]);
+					if(deg.checked){
+						b=a*(Math.PI/180);
+						input.value=Math.cos(b);
+					}
+					else{
+						input.value=Math.cos(a);
+					}
+				}
+				if(exp.includes("tan")){
+					let deg=document.getElementById("deg");
+					c=exp.split(" ");
+					let a=parseInt(c[1]);
+					if(deg.checked){
+						b=a*(Math.PI/180);
+						input.value=Math.tan(b);
+					}
+					else{
+						b=a*(Math.PI/180);
+						input.value=Math.tan(a);
+					}
+				}
+				if(exp.includes("asin")){
+					let deg=document.getElementById("deg");
+					c=exp.split(" ");
+					let a=parseFloat(c[1]);
+					if(deg.checked){
+						b=Math.asin(a);
+						input.value=b*(180/Math.PI);
+					}
+					else{
+						input.value=Math.asin(a);
+					}
+				}
+				if(exp.includes("acos")){
+					let deg=document.getElementById("deg");
+					c=exp.split(" ");
+					let a=parseFloat(c[1]);
+					if(deg.checked){
+						b=Math.acos(a);
+						input.value=b*(180/Math.PI);
+					}
+					else{
+						input.value=Math.acos(a);
+					}
+				}
+				if(exp.includes("atan")){
+					let deg=document.getElementById("deg");
+					c=exp.split(" ");
+					let a=parseFloat(c[1]);
+					if(deg.checked){
+						b=Math.atan(a);
+						input.value=b*(180/Math.PI);
+					}
+					else{
+						input.value=Math.atan(a);
+					}
+				}
+			}
+		}
+		function back(){
+			let input=document.getElementById("answerId");
+			let exp=input.value;
+			if(exp=="Infinity" || exp=="NaN"){
+				input.value="";
+			}else{
+				input.value=exp.substring(0,exp.length-1);
+			}
+		}
+		function signChange(){
+			let input=document.getElementById("answerId");
+			let exp=parseInt(input.value);
+			input.value=exp*(-1);
+		}
+		function oneByX(){
+			let input=document.getElementById("answerId");
+			let exp=parseInt(input.value);
+			input.value=1/exp;
+		}
+		function squareX(){
+			let input=document.getElementById("answerId");
+			let exp=parseInt(input.value);
+			input.value=exp*exp;
+		}
+		function rootX(){
+			let input=document.getElementById("answerId");
+			let exp=parseInt(input.value);
+			input.value=Math.sqrt(exp);
+		}
+		function random(){
+			let input=document.getElementById("answerId");
+			input.value='';
+			input.value+=Math.random();
+		}
+		function factorial(a){
+			let ans=1;
+			for(i=2;i<=a;i++){
+				ans*=i;
+			}
+			return ans;
+		}
+		function cuberoot(){
+			let input=document.getElementById("answerId");
+			let exp=parseInt(input.value);
+			input.value=Math.cbrt(exp);
+		}
+		function log(){
+			let input=document.getElementById("answerId");
+			let exp=parseInt(input.value);
+			input.value=Math.log(exp);
+		}
+		function log10(){
+			let input=document.getElementById("answerId");
+			let exp=parseInt(input.value);
+			input.value=Math.log10(exp);
+		}
+		function cube(){
+			let input=document.getElementById("answerId");
+			let exp=parseInt(input.value);
+			input.value=exp*exp*exp;
+		}
+		function eRaisedtoX(){
+			let input=document.getElementById("answerId");
+			let exp=input.value;
+			flag=0
+			if(exp.length<1){
+				input.value="e^";
+				flag=1;
+			}else{
+				input.value+="*e^";
+			}
+		}
+		function tenRaisedtoX(){
+			let input=document.getElementById("answerId");
+			let exp=input.value;
+			input.value="10^";
+		}
+		function pi(){
+			let input=document.getElementById("answerId");
+			let exp=input.value;
+			if(exp.length<1){
+				input.value=Math.PI;
+			}else{
+				input.value+='*'+Math.PI;
+			}
+		}
+		function e(){
+			let input=document.getElementById("answerId");
+			let exp=input.value;
+			if(exp.length<1){
+				input.value=Math.E;
+			}else{
+				input.value+='*'+Math.E;
+			}
+		}
+		function sin(){
+			let input=document.getElementById("answerId");
+			let exp=input.value;
+			input.value='sin ';
+		}
+		function cos(){
+			let input=document.getElementById("answerId");
+			let exp=input.value;
+			input.value='cos ';
+		}
+		function tan(){
+			let input=document.getElementById("answerId");
+			let exp=input.value;
+			input.value='tan ';
+		}
+		function asin(){
+			let input=document.getElementById("answerId");
+			let exp=input.value;
+			input.value='asin ';
+		}
+		function acos(){
+			let input=document.getElementById("answerId");
+			let exp=input.value;
+			input.value='acos ';
+		}
+		function atan(){
+			let input=document.getElementById("answerId");
+			let exp=input.value;
+			input.value='atan ';
+		}
+	</script>
+</body>
+</html>

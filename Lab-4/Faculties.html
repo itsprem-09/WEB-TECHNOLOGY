@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // Array of faculty objects
+        let faculties = [
+            {
+                name: "Dr. John Doe",
+                position: "Professor",
+                department: "Computer Science",
+                office: "ABCD Building, Room 101",
+                email: "john.doe@example.com"
+            },
+            {
+                name: "Dr. Jane Smith",
+                position: "Associate Professor",
+                department: "Physics",
+                office: "EFGH Building, Room 202",
+                email: "jane.smith@example.com"
+            },
+            {
+                name: "Prof. Michael Brown",
+                position: "Assistant Professor",
+                department: "Mathematics",
+                office: "IJKL Building, Room 303",
+                email: "michael.brown@example.com"
+            }
+        ];
+        document.write('<table border = 1 cellspacing="0">')
+        document.write("<tr>")
+        document.write("<td>Name</td>");
+        document.write("<td>Position</td>");
+        document.write("<td>Department</td>");
+        document.write("<td>Office</td>");
+        document.write("<td>Email</td>");
+        document.write("</tr>")
+
+        for (let i = 0; i < faculties.length; i++) {
+            document.write("<tr>")
+            document.write("<td>" + faculties[i].name + "</td>")
+            document.write("<td>" + faculties[i].position + "</td>")
+            document.write("<td>" + faculties[i].department + "</td>")
+            document.write("<td>" + faculties[i].office + "</td>")
+            document.write("<td>" + faculties[i].email + "</td>")
+            document.write("</tr>")
+        }
+        document.write("</table>")
+    </script>
+</body>
+
+</html>
